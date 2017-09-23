@@ -2,7 +2,7 @@ import React from 'react';
 
 function Quiz(props) {
     return (
-        <div>I'm a quiz component</div>
+        <div>Im a quiz component</div>
     );
 }
 

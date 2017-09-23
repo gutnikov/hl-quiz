@@ -7,6 +7,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 
 let lastPlayerId = 0;
 
@@ -22,14 +27,14 @@ app.get('/players', function(req, res) {
 });
 
 // Register new player
-// curl -d '{"userName":"Alessandro", "phone":"89263554622"}' -X POST -H "Content-Type: application/json" http://localhost:8080/player
+// curl -d '{"name":"Alessandro", "phone":"89263554622"}' -X POST -H "Content-Type: application/json" http://localhost:8080/player
 app.post('/player', function(req, res) {
     const {
-        userName,
+        name,
         phone
     } = req.body;
 
-    if (!userName || !userName.trim().length ||
+    if (!name || !name.trim().length ||
         !phone || !phone.trim().length) {
         res.sendStatus(400);
         return;
@@ -48,8 +53,8 @@ app.post('/player', function(req, res) {
 
     // Register user
     players.push({
-        userId: lastPlayerId++,
-        userName: userName,
+        id: lastPlayerId++,
+        name: name,
         phone: phone,
         score: -1
     });
@@ -57,19 +62,19 @@ app.post('/player', function(req, res) {
 });
 
 // Update players score
-// curl -d '{"userId": 0, "score":100}' -X POST -H "Content-Type: application/json" http://localhost:8080/score
+// curl -d '{"id": 0, "score":100}' -X POST -H "Content-Type: application/json" http://localhost:8080/score
 app.post('/score', function(req, res) {
     const {
-        userId,
+        id,
         score
     } = req.body;
-    const player = players.find(p => p.userId === userId);
+    const player = players.find(p => p.id === id);
     if (!player || isNaN(score) || score < 0) {
         res.sendStatus(400);
         return;
     }
     // Set again?
-    if (player.score === -1) {
+    if (player.score !== -1) {
         res.sendStatus(409);
         return;
     }
