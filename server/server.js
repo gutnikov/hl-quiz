@@ -8,8 +8,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
 
@@ -34,8 +35,7 @@ app.post('/player', function(req, res) {
         phone
     } = req.body;
 
-    if (!name || !name.trim().length ||
-        !phone || !phone.trim().length) {
+    if (!name || !name.trim().length || !phone || !phone.trim().length) {
         res.sendStatus(400);
         return;
     }
@@ -52,13 +52,16 @@ app.post('/player', function(req, res) {
     }
 
     // Register user
-    players.push({
+    const user = {
         id: lastPlayerId++,
         name: name,
         phone: phone,
         score: -1
+    };
+    players.push(user);
+    res.status(201).json({
+        id: user.id
     });
-    res.sendStatus(201); // Created
 });
 
 // Update players score

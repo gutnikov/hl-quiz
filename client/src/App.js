@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import PlayerList from './PlayerList';
 import Quiz from './Quiz';
+import QuizRegistration from './QuizRegistration';
 
 import {
     BrowserRouter as Router,
@@ -14,6 +15,7 @@ class App extends Component {
         <Router>
             <div>
                 <Route exact path="/" component={PlayerList}/>
+                <Route path="/checkin" component={QuizRegistration}/>
                 <Route path="/quiz" component={Quiz}/>
             </div>
         </Router>
