@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import PlayerList from './PlayerList';
 import Quiz from './Quiz';
@@ -10,17 +10,17 @@ import {
 } from 'react-router-dom';
 
 class App extends Component {
-  render() {
-    return (
-        <Router>
-            <div>
-                <Route exact path="/" component={PlayerList}/>
-                <Route path="/checkin" component={QuizRegistration}/>
-                <Route path="/quiz" component={Quiz}/>
-            </div>
-        </Router>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Route exact path="/" component={PlayerList}/>
+                    <Route path="/checkin" component={QuizRegistration}/>
+                    <Route path="/quiz" component={Quiz}/>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
