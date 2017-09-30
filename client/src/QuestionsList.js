@@ -36,8 +36,7 @@ export default class {
 	list;
 	lastQuestionId;
 
-	constructor(props) {
-		super(props);
+	constructor() {
 		this.list = questions.slice();
 		this.lastQuestionId = -1;
 	}

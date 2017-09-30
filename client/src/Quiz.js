@@ -1,5 +1,5 @@
-import React from 'react';
-import QuestionList from './questionList';
+import React, {Component} from 'react';
+import QuestionsList from './QuestionsList';
 import QuizQuestion from './QuizQuestion';
 
 const QUIZ_TIME_SEC = 20;
@@ -13,6 +13,7 @@ const ANSWER_NONE = 3;
 
 class Quiz extends Component {
 
+	questions = null;
 	questionTimerId = null;
 	indicationTimerId = null;
 
@@ -29,13 +30,14 @@ class Quiz extends Component {
 	constructor(props) {
 		super(props);
 
+		this.questions = new QuestionsList();
 	    const match = props.location.search.match(/p1=(\d+)&p2=(\d+)/);
 	    const [, player1Id, player2Id] = match;
 
 		this.state = {
 			question: null,
 			curQuestionTimeLast: null,
-			indicationTimeLast: null
+			indicationTimeLast: null,
 			// ids
 			player1Id: player1Id,
 			player2Id: player2Id,
@@ -51,27 +53,25 @@ class Quiz extends Component {
 	}
 
 	render() {
-	    if (error) {
-	        return <div>Wrong or missing player id</div>;
-	    }
-
-	    if (!question) {
-	    	return <div>Ready?<div>
-	    }
-
-	    return <QuizQuestion/>
+		if (this.state.error) {
+			return <div>Wrong or missing player id</div>;
+		} else if (!this.state.question) {
+			return <div>Get ready!!</div>;
+		} else {
+			return <QuizQuestion question={this.state.question}/>;
+		}
 	}
 
-	run() {
+	componentDidMount() {
 		this.setNextQuestion();
 	}
 
 	setNextQuestion() {
-		this.questionTimerId = setTimeout(this.onQuestionTimedout.bind(this), QUESTION_TIME_SEC);
+		this.questionTimerId = setTimeout(this.onQuestionTimedout.bind(this), QUESTION_TIME_SEC * 1000);
 		this.setState({
 			player1AnswerState: NO_ANSWER_YET,
 			player2AnswerState: NO_ANSWER_YET,
-			question: QuestionList.getNextQuestion()
+			question: this.questions.getNextQuestion()
 		});
 	}
 
@@ -89,7 +89,7 @@ class Quiz extends Component {
 	onQuestionAnswer(playerId, isRight) {
 		const [addTo1, addTo2] = (isRight ? this.rightScoreTo : this.wrongScoreTo)[playerId];
 		this.setState({
-			[`player${playerId}AnswerState`] = isRight ? ANSWER_RIGHT : ANSWER_WRONG,
+			[`player${playerId}AnswerState`]: isRight ? ANSWER_RIGHT : ANSWER_WRONG,
 			player1Score: this.state.player1Score + addTo1,
 			player2Score: this.state.player2Score + addTo2
 		});
