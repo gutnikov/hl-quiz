@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import QuestionsList from './QuestionsList';
 import QuizQuestion from './QuizQuestion';
+import QuizScore from './QuizScore';
+import QuizAnswer from './QuizAnswer';
 
 const QUIZ_TIME_SEC = 20;
-const QUESTION_TIME_SEC = 5;
+const QUESTION_TIME_SEC = 5000;
 const INDICATION_TIME_SEC = 1;
 
 const NO_ANSWER_YET = 0;
@@ -45,21 +47,32 @@ class Quiz extends Component {
 			player1Score: 0,
 			player2Score: 0,
 			// right-wrong indication
-			player1AnswerState: null,
-			player2AnswerState: null,
-
+			player1Answer: {
+				state: ANSWER_RIGHT,
+				text: 'Fuck yeahh',
+			},
+			player2Answer: {
+				state: NO_ANSWER_YET,
+				text: ''
+			},
 			error: null,
 		}
 	}
 
 	render() {
+		let result;
 		if (this.state.error) {
-			return <div>Wrong or missing player id</div>;
+			result = <div>Wrong or missing player id</div>;
 		} else if (!this.state.question) {
-			return <div>Get ready!!</div>;
+			result = <div>Get ready!!</div>;
 		} else {
-			return <QuizQuestion question={this.state.question}/>;
+			result = <div className="quiz">
+				<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+				<QuizQuestion question={this.state.question}/>;
+				<QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
+			</div>;
 		}
+		return <div className="quiz-container">{result}</div>;
 	}
 
 	componentDidMount() {
