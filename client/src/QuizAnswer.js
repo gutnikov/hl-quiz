@@ -8,22 +8,24 @@ const ANSWER_WRONG = 2;
 const ANSWER_NONE = 3;
 
 function QuizAnswer({player1Answer, player2Answer}) {
-	return (<div className="player-answers">
-		<div className={cx('player-answer', answerStateToClass(player1Answer.state))}>{player1Answer.text}</div>
-		<div className={cx('player-answer', answerStateToClass(player2Answer.state))}>{player2Answer.text}</div>
+	return (<div className="quiz-answers">
+		<div className={cx('quiz-answer', answerStateToClass(player1Answer.state))}>{player1Answer.text}</div>
+		<div className={cx('quiz-answer', answerStateToClass(player2Answer.state))}>{player2Answer.text}</div>
 	</div>);
 }
 
 function answerStateToClass(state) {
 	switch(state) {
 		case NO_ANSWER_YET: 
-			return 'none';
+			return 'quiz-answer-pending';
 		case ANSWER_RIGHT:
-			return 'right';
+			return 'quiz-answer-right';
 		case ANSWER_WRONG:
-			return 'wrong';
+			return 'quiz-answer-wrong';
 		case ANSWER_NONE:
-			return 'none';
+			return 'quiz-answer-none';
+		default:
+			return 'quiz-answer-none';
 	}
 }
 

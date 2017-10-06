@@ -71,7 +71,7 @@ app.post('/score', function(req, res) {
         id,
         score
     } = req.body;
-    const player = players.find(p => p.id === id);
+    const player = players.find(p => p.id === Number(id));
     if (!player || isNaN(score) || score < 0) {
         res.sendStatus(400);
         return;
@@ -81,9 +81,36 @@ app.post('/score', function(req, res) {
         res.sendStatus(409);
         return;
     }
-    player.score = score;
-    res.sendStatus(200);
+    player.score = Number(score);
+
+    // Reorder rating
+    updateRatings();
+
+    res.status(200).json({
+        rating: player.rating
+    });
 });
+
+function updateRatings() {
+    // Order players
+    players.sort(function(a, b) {
+        if (a.score === b.score) {
+            return 0;
+        } else {
+            return a.score < b.score ? 1 : -1;
+        }
+    });
+    // Set ratings
+    players[0].rating = 1;
+    for (let i = 1; i < players.length; i++) {
+        const player = players[i];
+        if (player.score === players[i-1].score) {
+            player.rating = players[i-1].rating;
+        } else {
+            player.rating = players[i-1].rating + 1;
+        }
+    }
+}
 
 app.listen(8080, function() {
     console.log('Up and running');

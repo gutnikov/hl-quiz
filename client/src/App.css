@@ -32,12 +32,24 @@
 
 }
 
-.quiz-answers {
-
-}
-
 .quiz-answer {
   margin: 10px 0; 
+}
+
+.quiz-answer-pending {
+  color: gray;
+}
+
+.quiz-answer-right {
+  color: green;
+}
+
+.quiz-answer-wrong {
+  color: red;
+}
+
+.quiz-answer-none {
+  color: gray;
 }
 
 .quiz-score, .quiz-answers {

@@ -3,15 +3,41 @@ import QuestionsList from './QuestionsList';
 import QuizQuestion from './QuizQuestion';
 import QuizScore from './QuizScore';
 import QuizAnswer from './QuizAnswer';
+import Countdown from './Countdown';
+import {
+    Link
+} from 'react-router-dom';
+import t from './t';
 
-const QUIZ_TIME_SEC = 20;
-const QUESTION_TIME_SEC = 5000;
-const INDICATION_TIME_SEC = 1;
+// How long the whole quest lasts
+const QUIZ_TIME_SEC = 60;
 
-const NO_ANSWER_YET = 0;
+// How much time to answer the question
+const QUESTION_TIME_SEC = 10;
+
+// How long users will be shown the result of answer ( pause between questions )
+const PAUSE_TIME_SEC = 2;
+
+// Waiting for answer
+const ANSWER_PENDING = 0;
+
+// Right/wrong
 const ANSWER_RIGHT = 1;
 const ANSWER_WRONG = 2;
+
+// Havn't answered
 const ANSWER_NONE = 3;
+
+const KEY_MAP = {
+	'1': '1-1',
+	'2': '1-2',
+	'3': '1-3',
+	'4': '1-4',
+	'h': '2-1',
+	'j': '2-2',
+	'k': '2-3',
+	'l': '2-4'
+}
 
 class Quiz extends Component {
 
@@ -37,62 +63,210 @@ class Quiz extends Component {
 	    const [, player1Id, player2Id] = match;
 
 		this.state = {
-			question: null,
+			question: '',
 			curQuestionTimeLast: null,
 			indicationTimeLast: null,
+			// ratings
+			player1Rating: null,
+			player2Rating: null,
 			// ids
 			player1Id: player1Id,
 			player2Id: player2Id,
 			// scores
 			player1Score: 0,
 			player2Score: 0,
-			// right-wrong indication
-			player1Answer: {
-				state: ANSWER_RIGHT,
-				text: 'Fuck yeahh',
-			},
-			player2Answer: {
-				state: NO_ANSWER_YET,
-				text: ''
-			},
+			player1Answer: null,
+			player2Answer: null,
 			error: null,
 		}
 	}
 
 	render() {
-		let result;
+		return <div className="quiz-container">{this.renderCurrentState()}</div>;
+	}
+
+	renderCurrentState() {
+		// Any shit?
 		if (this.state.error) {
-			result = <div>Wrong or missing player id</div>;
-		} else if (!this.state.question) {
-			result = <div>Get ready!!</div>;
-		} else {
-			result = <div className="quiz">
-				<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
-				<QuizQuestion question={this.state.question}/>;
-				<QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
-			</div>;
+			return this.renderError();
 		}
-		return <div className="quiz-container">{result}</div>;
+
+		if (this.state.player1Rating !== null && this.state.player2Rating !== null) {
+			return this.renderScore();
+		}
+		// Current question
+		else if (this.state.question) {
+			// Somebody has an answer?
+			if (this.state.player1Answer.state !== ANSWER_PENDING || this.state.player2Answer.state !== ANSWER_PENDING) {
+				return this.renderAnswer();
+			// Not yet?
+			} else {
+				return this.renderQuestion();
+			}
+		} 
+		else {
+			// Questions over?
+			return this.renderSaveResults();
+		}
+	}
+
+	renderQuestion() {
+		return (<div className="quiz">
+			<Countdown value={QUESTION_TIME_SEC}/>
+			<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+			<QuizQuestion question={this.state.question}/>
+		</div>);
+	}
+
+	renderAnswer() {
+		return (<div className="quiz">
+			<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+			<QuizQuestion question={this.state.question}/>;
+			<QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
+		</div>);
+	}
+
+	renderSaveResults() {
+		return <div>Saving results...</div>;	
+	}
+
+	postScore(id, score) {
+        return fetch('http://localhost:8080/score', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+    			id,
+    			score
+    		})
+        }).then(function(res) {
+        	if (res.status === 200) {
+	        	return res.json();
+        	}
+        });
+	}
+
+	postResults() {
+		this.postScore(this.state.player1Id, this.state.player1Score).then(function(p1) {
+			this.postScore(this.state.player2Id, this.state.player2Score).then(function(p2) {
+				this.setState({
+	        		player1Rating: p1.rating,
+	        		player2Rating: p2.rating
+				});
+			}.bind(this));
+		}.bind(this));
+	}
+
+	renderScore() {
+		let winner;
+		if (this.state.player1Score === this.state.player2Score) {
+			winner = <div>{t('Draw')}</div>
+		} else {
+			winner = <div>{t('The winner is player')} {this.state.player1Score > this.state.player2Score ? 1 : 2}</div>;
+		}
+		return (
+			<div>
+			<div> {winner} </div>
+			<div> {t('Player 1 rating')}: {this.state.player1Rating} </div>
+			<div> {t('Player 2 rating')}: {this.state.player2Rating} </div>
+			<Link to='/checkin'>{t('Go back to reg')}</Link>;
+			</div>
+		)
+	}
+
+	renderError() {
+		return <div>{t('OMAGAT...an error')}</div>
 	}
 
 	componentDidMount() {
+		this.listenToInput();
 		this.setNextQuestion();
+		this.setQuizTimer();
+	}
+
+	componentWillUnmount() {
+		this.unlistenFromInput();	
+	}
+
+	setQuizTimer() {
+		this.quizTimer = setTimeout(this.onQuizTimedout.bind(this), QUIZ_TIME_SEC * 1000);	
+	}
+
+	onQuizTimedout() {
+		clearTimeout(this.quizTimer);
+		this.questions.stop();
+	}
+
+	listenToInput() {
+		this.keydownHanlder = this.keydownHanlder.bind(this);
+		document.addEventListener('keydown', this.keydownHanlder);
+	}
+
+	keydownHanlder(event) {
+		const action = KEY_MAP[event.key];
+		if (action) {
+			const [playerId, actionId] = action.split('-');
+			this.onPlayerInput(Number(playerId), Number(actionId));
+		}
+	}
+
+	unlistenFromInput() {
+		document.removeEventListener('keydown', this.keydownHanlder);
+	}
+
+	onPlayerInput(playerId, actionId) {
+		// Not a question time?
+		if (this.state.player1Answer.state !== ANSWER_PENDING ||
+			this.state.player2Answer.state !== ANSWER_PENDING) {
+			return;	
+		}
+		const isRight = this.state.question.rightAnswer === actionId;	
+		this.setState({
+			[`player${playerId}Answer`] : {
+				state: isRight ? ANSWER_RIGHT : ANSWER_WRONG,
+				text: this.state.question.variants[actionId-1]
+			},
+			[`player${playerId}Score`] : this.state[`player${playerId}Score`] + (isRight ? 1 : 0)
+		});
+		this.setQuestionPause();
 	}
 
 	setNextQuestion() {
-		this.questionTimerId = setTimeout(this.onQuestionTimedout.bind(this), QUESTION_TIME_SEC * 1000);
+		const question = this.questions.getNextQuestion();
 		this.setState({
-			player1AnswerState: NO_ANSWER_YET,
-			player2AnswerState: NO_ANSWER_YET,
-			question: this.questions.getNextQuestion()
+			player1Answer: {
+				state: ANSWER_PENDING,
+				text: ''
+			},
+			player2Answer: {
+				state: ANSWER_PENDING,
+				text: ''
+			},
+			question: question
 		});
+		// If only stil have questions
+		if (question) {
+			this.questionTimerId = setTimeout(this.onQuestionTimedout.bind(this), QUESTION_TIME_SEC * 1000);
+		} else {
+			// Don't wait for the end of the quiz
+			clearTimeout(this.quizTimer);
+			this.unlistenFromInput();
+			this.postResults();
+		}
 	}
 
 	// No one answered?
 	onQuestionTimedout() {
 		this.setState({
-			player1AnswerState: ANSWER_NONE,
-			player2AnswerState: ANSWER_NONE
+			player1Answer: {
+				state: ANSWER_NONE,
+				text: t('No answer')
+			},
+			player2Answer: {
+				state: ANSWER_NONE,
+				text: t('No answer')
+			}
 		});
 		// Show answer status for a while
 		this.setQuestionPause();
@@ -113,7 +287,7 @@ class Quiz extends Component {
 	// Show answer statuses for a while
 	setQuestionPause() {
 		clearTimeout(this.questionTimerId);
-		this.pauseTimerId = setTimeout(this.onPauseEnded.bind(this));
+		this.pauseTimerId = setTimeout(this.onPauseEnded.bind(this), PAUSE_TIME_SEC * 1000);
 	}
 
 	onPauseEnded() {

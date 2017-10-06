@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import t from './t';
 
 const TOP_PLAYERS_COUNT = 10;
 
@@ -17,10 +18,11 @@ class PlayerList extends Component {
                 {
                     this.state.players.map(function(player) {
                         return (<div key={player.id}>
-                            <span>{player.id}</span>
-                            <span>{player.name}</span>
-                            <span>{player.score}</span>
-                            <span>{player.phone}</span>
+                            <span>{t('id = ')}{player.id} | </span>
+                            <span>{t('rating = ')}{player.rating} | </span>
+                            <span>{t('name = ')}{player.name} |</span>
+                            <span>{t('score = ')}{player.score} |</span>
+                            <span>{t('phone = ')}{player.phone} |</span>
                         </div>);
                     })
                 }
@@ -40,7 +42,7 @@ class PlayerList extends Component {
                     if (a.score === b.score) {
                         return 0;
                     } else {
-                        return a.score > b.score ? 1 : -1;
+                        return a.score < b.score ? 1 : -1;
                     }
                 }).slice(TOP_PLAYERS_COUNT);
                 this.setState({
