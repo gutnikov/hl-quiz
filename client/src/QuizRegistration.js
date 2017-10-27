@@ -34,8 +34,11 @@ class QuizRegistration extends Component {
         if (bothRegistered) {
             return <Link to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>;
         } else {
-            return <div>
-				<UserLogin user={this.state.user1} onSubmit={this.onSubmit1} onFieldChange={this.onFieldChange1}/>
+            return <div className="row">
+                <div className="col-12 text-center mb-3">
+                    <h3>Регистрация <span className="badge badge-pill red">ожидаем 2 участников</span></h3>
+				</div>
+                <UserLogin user={this.state.user1} onSubmit={this.onSubmit1} onFieldChange={this.onFieldChange1}/>
 				<UserLogin user={this.state.user2} onSubmit={this.onSubmit2} onFieldChange={this.onFieldChange2}/>
 			</div>;
         }

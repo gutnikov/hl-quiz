@@ -17,11 +17,32 @@ function UserLogin(props) {
 			<span>{t('Registered')}!</span>;
 		</div>;
     } else {
-        return <div>
+        return <div className="col-6">
+                    <div className="card">
+                    <div>{error || ''}</div>
+                    <img className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap" />
+                    <div className="card-body">
+                        <h4 className="card-title">Игрок</h4>
+                        <form>
+                            <div className="md-form">
+                           
+                                <input type="text" value={name} name="form-player-name" onChange={props.onFieldChange} id="form-player-name" className="form-control" />
+                                <label for="form-player-name">{t('Name')}</label>
+                            </div>
+
+                            <div className="md-form">
+          
+                                <input  type="text" value={phone} name="form-player-phone" onChange={props.onFieldChange} id="form-player-phone" className="form-control" />
+                                <label for="form-player-phone">{t('Phone')}</label>
+                            </div>
+
+                            <div className="text-center">
+                            <button className="btn btn-primary" type="button" onClick={props.onSubmit} disabled={canSubmit ? null : 'disabled'}>{t('Done')} <i className="fa fa-play ml-1"/></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 			<div>{error || ''}</div>
-			<label>{t('Name')}: <input type="text" value={name} name="name" onChange={props.onFieldChange}/></label>
-			<label>{t('Phone')}: <input type="text" value={phone} name="phone" onChange={props.onFieldChange}/></label>
-			<button type="button" onClick={props.onSubmit} disabled={canSubmit ? null : 'disabled'}>{t('Done')}</button>
 		</div>;
     }
 }
