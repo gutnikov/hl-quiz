@@ -49,6 +49,11 @@ class QuizRegistration extends Component {
             name,
             value
         } = event.target;
+        console.log({
+            [`user${formId}`]: Object.assign({}, this.state[`user${formId}`], {
+                [name]: value
+            })
+        });
         this.setState({
             [`user${formId}`]: Object.assign({}, this.state[`user${formId}`], {
                 [name]: value

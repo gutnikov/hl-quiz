@@ -16,5 +16,5 @@ const map = {
 }
 
 export default function(msg) {
-	return map[msg];
+	return map[msg] || msg;
 }

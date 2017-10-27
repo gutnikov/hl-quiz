@@ -25,15 +25,13 @@ function UserLogin(props) {
                         <h4 className="card-title">Игрок</h4>
                         <form>
                             <div className="md-form">
-                           
-                                <input type="text" value={name} name="form-player-name" onChange={props.onFieldChange} id="form-player-name" className="form-control" />
-                                <label for="form-player-name">{t('Name')}</label>
+                                <input type="text" value={name} name="name" onChange={props.onFieldChange} id="form-player-name" className="form-control" />
+                                <label for="name">{t('Name')}</label>
                             </div>
 
                             <div className="md-form">
-          
-                                <input  type="text" value={phone} name="form-player-phone" onChange={props.onFieldChange} id="form-player-phone" className="form-control" />
-                                <label for="form-player-phone">{t('Phone')}</label>
+                                <input  type="text" value={phone} name="phone" onChange={props.onFieldChange} id="form-player-phone" className="form-control" />
+                                <label for="phone">{t('Phone')}</label>
                             </div>
 
                             <div className="text-center">
