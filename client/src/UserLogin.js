@@ -20,7 +20,7 @@ function UserLogin(props) {
         return <div className="col-6">
                     <div className="card">
                     <div>{error || ''}</div>
-                    <img className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap" />
+                    <img className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card cap" />
                     <div className="card-body">
                         <h4 className="card-title">Игрок</h4>
                         <form>

@@ -21,6 +21,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.15.4",
     "fs": "^0.0.1-security",
+    "jquery": "^3.2.1",
     "node-csv-parse": "^1.2.0",
     "path": "^0.12.7",
     "should": "^13.1.3"
