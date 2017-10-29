@@ -13,7 +13,7 @@ import t from './t';
 const QUIZ_TIME_SEC = 60;
 
 // How much time to answer the question
-const QUESTION_TIME_SEC = 10;
+const QUESTION_TIME_SEC = 1000;
 
 // How long users will be shown the result of answer ( pause between questions )
 const PAUSE_TIME_SEC = 2;
@@ -37,7 +37,14 @@ const KEY_MAP = {
 	'j': '2-2',
 	'k': '2-3',
 	'l': '2-4'
-}
+};
+
+const GAMEPAD_KEYS_INDEX = {
+	3: 1,
+	2: 2,
+	1: 3,
+	0: 4
+};
 
 class Quiz extends Component {
 
@@ -78,7 +85,7 @@ class Quiz extends Component {
 			player1Answer: null,
 			player2Answer: null,
 			error: null,
-		}
+		};
 	}
 
 	render() {
@@ -201,6 +208,8 @@ class Quiz extends Component {
 	listenToInput() {
 		this.keydownHanlder = this.keydownHanlder.bind(this);
 		document.addEventListener('keydown', this.keydownHanlder);
+
+        this._gamepadUpdateToken = setInterval(this._checkGamepadPressedButtons.bind(this), 100);
 	}
 
 	keydownHanlder(event) {
@@ -211,7 +220,9 @@ class Quiz extends Component {
 		}
 	}
 
+
 	unlistenFromInput() {
+		clearInterval(this._gamepadUpdateToken);
 		document.removeEventListener('keydown', this.keydownHanlder);
 	}
 
@@ -293,6 +304,23 @@ class Quiz extends Component {
 	onPauseEnded() {
 		clearTimeout(this.pauseTimerId);
 		this.setNextQuestion();
+	}
+
+    _checkGamepadPressedButtons() {
+		Object.keys(navigator.getGamepads()).forEach(key => {
+			const gamepad = navigator.getGamepads()[key];
+
+        	if (gamepad) {
+        		const playerId = gamepad.index + 1;
+
+                gamepad.buttons.forEach((button, index) => {
+                    if (button.pressed){
+                        console.info(`Pressed button ${index}`);
+                        this.onPlayerInput(playerId, GAMEPAD_KEYS_INDEX[index]);
+                    }
+                });
+			}
+		});
 	}
 }
 
