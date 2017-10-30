@@ -28,10 +28,10 @@ function UserLogin(props) {
                         <img className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card cap" />
                         <div className="card-body">
                             <div className="view gradient-card-header blue-gradient">
-                                <div class="red-text">
+                                <p className="red-text">
                                     {error || ''}
                                     <i class="close fa fa-times"></i>
-                                </div>
+                                </p>
                             </div>
                             <h4 className="card-title">Игрок</h4>
                             <form>
