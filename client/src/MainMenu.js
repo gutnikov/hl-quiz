@@ -1,19 +1,24 @@
 import React, {Component} from 'react';
-import {
-    Link
-} from 'react-router-dom';
 import t from './t';
 
 class MainMenu extends Component {
-
 	render() {
 		return (
-			<div>
-				<div>
-					<Link to='/rating'>{t('Players rating')}</Link>
-				</div>
-				<div>
-					<Link to='/checkin'>{t('New game!')}</Link>
+			<div className="row justify-content-md-center ">
+				<div className="col-md-6 mb-3 animated fadeIn">
+					<div className="text-center">
+						<ul>
+							<li>
+								<h1 className="display-4 font-bold mb-5 Up">IT-Викторина</h1></li>
+							<li>
+								<h5 className="mb-5 Up">Отвечай на вопросы, занимай место в турнирной таблице по знанию азов отрасли и получай классные призы!</h5>
+							</li>
+							<li className="Up">
+								<a href="/checkin"  className="btn btn-purple btn-rounded"><i className="fa fa-gamepad left"></i> {t('New game!')}</a>
+								<a href="/rating" className="btn btn-outline-purple btn-rounded"><i className="fa fa-group left"></i> {t('Players rating')}</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		);

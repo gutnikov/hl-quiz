@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="full-height">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/img/favicon.ico">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -27,56 +27,43 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar--primary">
-      
-          <!-- Navbar brand -->
-          <a class="navbar-brand" href="#">Викторина Badoo</a>
-      
-          <!-- Collapse button -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-      
-          <!-- Collapsible content -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      
-              <!-- Links -->
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Features</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">Pricing</a>
-                  </li>
-      
-                  <!-- Dropdown -->
-                  <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="#">Action</a>
-                          <a class="dropdown-item" href="#">Another action</a>
-                          <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                  </li>
-      
-              </ul>
-              <!-- Links -->
-      
-              <!-- Search form -->
-              <form class="form-inline">
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-              </form>
-          </div>
-          <!-- Collapsible content -->
-      
-      </nav>
-      <!--/.Navbar-->
-      <div class="container mt-5" id="root" >
-        <div class="row" >1 </div>
-      </div>
+
+<!--Main Navigation-->
+<header>
+    
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="%PUBLIC_URL%/img/logo.svg" height="30" alt="">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Главная <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/rating">Рейтинг</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    
+        <!-- Intro Section -->
+        <div class="view hm-purple-slight jarallax" data-jarallax='{"speed": 0.2}' style="background-image: url('https://mdbootstrap.com/img/Photos/Others/gradient2.png');">
+            <div class="full-bg-img">
+                <div class="container flex-center" id="root"></div>
+            </div>
+        </div>
+    
+    </header>
+    <!--Main Navigation-->
+
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

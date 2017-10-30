@@ -14,18 +14,34 @@ class PlayerList extends Component {
 
     render() {
         return (
-            <div>
-                {
-                    this.state.players.map(function(player) {
-                        return (<div key={player.id}>
-                            <span>{t('id = ')}{player.id} | </span>
-                            <span>{t('rating = ')}{player.rating} | </span>
-                            <span>{t('name = ')}{player.name} |</span>
-                            <span>{t('score = ')}{player.score} |</span>
-                            <span>{t('phone = ')}{player.phone} |</span>
-                        </div>);
-                    })
-                }
+            <div className="row">
+                <div className="col-12 animated fadeIn">
+                    <h1 className="display-4 font-bold mb-5 Up">Рейтинг игроков</h1>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                {/* <th>№</th> */}
+                                <th>Rating</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                                {/* <th>Contact</th> */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            this.state.players.map(function(player) {
+                                return (<tr key={player.id}>
+                                    {/* <th scope="row">{t('id = ')}{player.id}</th> */}
+                                    <th scope="row">{t('rating = ')}{player.rating}</th>
+                                    <td>{t('name = ')}{player.name}</td>
+                                    <td>{t('score = ')}{player.score}</td>
+                                    {/* <td>{t('phone = ')}{player.phone}</td> */}
+                                </tr>);
+                            })
+                        }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

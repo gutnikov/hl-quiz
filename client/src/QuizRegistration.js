@@ -32,7 +32,7 @@ class QuizRegistration extends Component {
     render() {
         const bothRegistered = this.state.user1.registered && this.state.user2.registered;
         if (bothRegistered) {
-            return <Link to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>;
+            return <Link className="btn btn-unique waves-effect waves-light" to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>;
         } else {
             return <div className="row">
                 <div className="col-12 text-center mb-3">
