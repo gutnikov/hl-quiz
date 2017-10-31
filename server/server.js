@@ -20,9 +20,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-const phonesMap = {};
-
-db.defaults({ players: [], phonesMap: {} }).write();
+db.defaults({ players: [] }).write();
 
 // Actual players list
 // curl http://localhost:8080/players
@@ -51,12 +49,12 @@ app.post('/player', function(req, res) {
     // Take last digits to not to check +7 or 8 at the beginning
     const phoneTail = phone.trim().slice(-5);
 
+    let player = db.get('players').find({ 'phoneTail': phoneTail }).value();
+
     // Check if phone already registered?
-    if (phonesMap[phoneTail]) {
+    if (player) {
         res.sendStatus(409); // Conflict
         return;
-    } else {
-        phonesMap[phoneTail] = true;
     }
 
     // Register user
@@ -64,6 +62,7 @@ app.post('/player', function(req, res) {
         id: uniqid(),
         name: name,
         phone: phone,
+        phoneTail: phoneTail,
         score: -1,
         rating: 0
     };
