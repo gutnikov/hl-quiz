@@ -14,9 +14,9 @@ function UserLogin(props) {
         return <div className="col-6">
                     <div className="card">
                         <div className="card-body">
-                            <h5 class="pink-text"><i class="fa fa-cutlery"></i> {error || ''}</h5>
+                            <h5 className="pink-text"><i className="fa fa-cutlery"></i> {error || ''}</h5>
                             <h4 className="card-title">Игрок</h4>
-                            <p class="card-text">{name} c {phone}</p>
+                            <p className="card-text">{name} c {phone}</p>
                             <h4 className="card-title">{t('Registered')}!</h4>
                         </div>
                     </div>
@@ -30,7 +30,7 @@ function UserLogin(props) {
                             <div className="view gradient-card-header blue-gradient">
                                 <p className="red-text">
                                     {error || ''}
-                                    <i class="close fa fa-times"></i>
+                                    <i className="close fa fa-times"></i>
                                 </p>
                             </div>
                             <h4 className="card-title">Игрок</h4>
