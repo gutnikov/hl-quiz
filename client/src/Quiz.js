@@ -55,12 +55,12 @@ class Quiz extends Component {
 	rightScoreTo = {
 		1: [1, 0],
 		2: [0, 1]
-	}
+	};
 
 	wrongScoreTo = {
 		1: [0, 1],
 		2: [1, 0]
-	}
+	};
 
 	constructor(props) {
 		super(props);
@@ -232,14 +232,21 @@ class Quiz extends Component {
 			this.state.player2Answer.state !== ANSWER_PENDING) {
 			return;	
 		}
-		const isRight = this.state.question.rightAnswer === actionId;	
+
+		const isRight = this.state.question.rightAnswer === actionId;
+		const value = Number(this.state.question.value);
+
+		const scoreKey = `player${playerId}Score`;
+		const answerKey = `player${playerId}Answer`;
+
 		this.setState({
-			[`player${playerId}Answer`] : {
+			[answerKey] : {
 				state: isRight ? ANSWER_RIGHT : ANSWER_WRONG,
 				text: this.state.question.variants[actionId-1]
 			},
-			[`player${playerId}Score`] : this.state[`player${playerId}Score`] + (isRight ? 1 : 0)
+			[scoreKey] : this.state[scoreKey] + (isRight ? value : 0)
 		});
+
 		this.setQuestionPause();
 	}
 
