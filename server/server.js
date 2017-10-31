@@ -102,12 +102,8 @@ app.post('/score', function(req, res) {
         .assign({ score: Number(score)})
         .write();
 
-    const players = db.get('players').value();
-
     // Reorder rating
-    updateRatings(players);
-
-    db.set('players', players).write();
+    const players = updateRatings();
 
     player = players.find(item => {
         return item.id === id
@@ -118,7 +114,9 @@ app.post('/score', function(req, res) {
     });
 });
 
-function updateRatings(players) {
+function updateRatings() {
+    const players = db.get('players').value();
+
     // Order players
     players.sort(function(a, b) {
         if (a.score === b.score) {
@@ -131,8 +129,27 @@ function updateRatings(players) {
     // Set ratings
     players.forEach((player, key) => {
         player.rating = key + 1;
-    })
+    });
+
+    db.set('players', players).write();
+
+    return players;
 }
+
+// Actual players list
+//
+/**
+ * Update users positions
+ *
+ * curl http://localhost:8080/update-positions
+ */
+app.get('/update-positions', function(req, res) {
+    const players = updateRatings();
+
+    res.json({
+        players: players
+    });
+});
 
 app.listen(8080, function() {
     console.log('Up and running');
