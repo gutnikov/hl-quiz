@@ -65,9 +65,12 @@ class Quiz extends Component {
 	constructor(props) {
 		super(props);
 
+        var urlParams = new URLSearchParams(window.location.search);
+
 		this.questions = new QuestionsList();
-	    const match = props.location.search.match(/p1=(\d+)&p2=(\d+)/);
-	    const [, player1Id, player2Id] = match;
+
+	    const player1Id = urlParams.get('p1');
+        const player2Id = urlParams.get('p2');
 
 		this.state = {
 			question: '',
@@ -155,14 +158,14 @@ class Quiz extends Component {
 	}
 
 	postResults() {
-		this.postScore(this.state.player1Id, this.state.player1Score).then(function(p1) {
-			this.postScore(this.state.player2Id, this.state.player2Score).then(function(p2) {
-				this.setState({
-	        		player1Rating: p1.rating,
-	        		player2Rating: p2.rating
-				});
-			}.bind(this));
-		}.bind(this));
+		this.postScore(this.state.player1Id, this.state.player1Score).then(p1 => {
+            this.postScore(this.state.player2Id, this.state.player2Score).then(p2 => {
+                this.setState({
+                    player1Rating: p1.rating,
+                    player2Rating: p2.rating
+                });
+            })
+		});
 	}
 
 	renderScore() {
@@ -263,13 +266,16 @@ class Quiz extends Component {
 			},
 			question: question
 		});
+
 		// If only stil have questions
 		if (question) {
 			this.questionTimerId = setTimeout(this.onQuestionTimedout.bind(this), QUESTION_TIME_SEC * 1000);
 		} else {
 			// Don't wait for the end of the quiz
 			clearTimeout(this.quizTimer);
+
 			this.unlistenFromInput();
+
 			this.postResults();
 		}
 	}

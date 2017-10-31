@@ -12,8 +12,9 @@ const map = {
 	'The winner is player':'Победил игрок',
 	'Player 1 rating':'Рейтинг игрока 1',
 	'Player 2 rating':'Рейтинг игрока 2',
-	'Go back to reg':'Новый матч'
-}
+	'Go back to reg':'Новый матч',
+	'Value': 'Стоимость вопроса'
+};
 
 export default function(msg) {
 	return map[msg] || msg;

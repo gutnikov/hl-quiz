@@ -1,5 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const uniqid = require('uniqid');
+
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+
+const adapter = new FileSync('db.json');
+const db = low(adapter);
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,15 +20,16 @@ app.use(function(req, res, next) {
     next();
 });
 
-
-let lastPlayerId = 0;
-
-const players = [];
 const phonesMap = {};
+
+db.defaults({ players: [], phonesMap: {} }).write();
 
 // Actual players list
 // curl http://localhost:8080/players
 app.get('/players', function(req, res) {
+
+    const players = db.get('players').value();
+
     res.json({
         players: players
     });
@@ -53,12 +61,17 @@ app.post('/player', function(req, res) {
 
     // Register user
     const user = {
-        id: lastPlayerId++,
+        id: uniqid(),
         name: name,
         phone: phone,
-        score: -1
+        score: -1,
+        rating: 0
     };
-    players.push(user);
+
+    db.get('players')
+        .push(user)
+        .write();
+
     res.status(201).json({
         id: user.id
     });
@@ -71,27 +84,41 @@ app.post('/score', function(req, res) {
         id,
         score
     } = req.body;
-    const player = players.find(p => p.id === Number(id));
+
+    let player = db.get('players').find({ 'id': id }).value();
+
     if (!player || isNaN(score) || score < 0) {
         res.sendStatus(400);
         return;
     }
+
     // Set again?
     if (player.score !== -1) {
         res.sendStatus(409);
         return;
     }
-    player.score = Number(score);
+
+    db.get('players').find({ 'id': id })
+        .assign({ score: Number(score)})
+        .write();
+
+    const players = db.get('players').value();
 
     // Reorder rating
-    updateRatings();
+    updateRatings(players);
+
+    db.set('players', players).write();
+
+    player = players.find(item => {
+        return item.id === id
+    });
 
     res.status(200).json({
         rating: player.rating
     });
 });
 
-function updateRatings() {
+function updateRatings(players) {
     // Order players
     players.sort(function(a, b) {
         if (a.score === b.score) {
@@ -100,16 +127,11 @@ function updateRatings() {
             return a.score < b.score ? 1 : -1;
         }
     });
+
     // Set ratings
-    players[0].rating = 1;
-    for (let i = 1; i < players.length; i++) {
-        const player = players[i];
-        if (player.score === players[i-1].score) {
-            player.rating = players[i-1].rating;
-        } else {
-            player.rating = players[i-1].rating + 1;
-        }
-    }
+    players.forEach((player, key) => {
+        player.rating = key + 1;
+    })
 }
 
 app.listen(8080, function() {

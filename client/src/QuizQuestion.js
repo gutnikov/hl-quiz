@@ -4,6 +4,7 @@ import t from './t';
 function QuizQuestion({question}) {
 	return (<div>
 		<div className="quiz-question">{t('Question')}: {question.text}</div>
+		<div className="quiz-value">{t('Value')}: {question.value}</div>
 		<div className="quiz-answer-variants">{t('Answer variants')}:</div>	
 		{
 			question.variants.map(function(variant, index){
