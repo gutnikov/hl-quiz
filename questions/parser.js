@@ -32,6 +32,7 @@ fs.readFile(path.resolve(__dirname, FILE_NAME), 'utf8', (err, data) => {
         const k = Object.keys(item);
         const question = item[k[0]];
         const rightAnswer = item[k[1]];
+        const value = Number(item[k[5]]);
 
         const answers = shuffle([
             item[k[1]],
@@ -45,7 +46,8 @@ fs.readFile(path.resolve(__dirname, FILE_NAME), 'utf8', (err, data) => {
         const entry = {
             'text': question,
             'variants': answers,
-            'rightAnswer': rightKey
+            'rightAnswer': rightKey,
+            'value': value
         };
 
         outResult.push(entry);
