@@ -122,8 +122,8 @@ class Quiz extends Component {
 
 	renderQuestion() {
 		return (<div className="quiz">
-			<Countdown value={QUESTION_TIME_SEC}/>
 			<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+			<Countdown value={QUESTION_TIME_SEC}/>
 			<QuizQuestion question={this.state.question}/>
 		</div>);
 	}

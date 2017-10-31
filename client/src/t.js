@@ -2,7 +2,7 @@ const map = {
 	'Name': 'Имя',
 	'Phone': 'Телефон',
 	'Done': 'Зарегистрировать',
-	'Registered':'Зарегистрирован',
+	'Registered':'готов',
 	'Fight':'Поехали',
 	'Time to answer':'Осталось времени',
 	'Player 1 score':'Игрок 1',
