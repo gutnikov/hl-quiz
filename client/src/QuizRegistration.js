@@ -15,6 +15,10 @@ function voidUser(id = null) {
     }
 }
 
+const errorMarkup = function (text) {
+    return (<span className="badge badge-pill red">{text}</span>);
+};
+
 class QuizRegistration extends Component {
 
     constructor(props) {
@@ -78,7 +82,7 @@ class QuizRegistration extends Component {
                     this.setError(formId, t('Form is invalid'));
                     break;
                 case 409:
-                    this.setError(formId, t('User already registered'));
+                    this.setError(formId, errorMarkup(t('Игрок уже зарегистрирован')));
                     break;
                 case 201:
                     res.json().then(function(json) {

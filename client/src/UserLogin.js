@@ -27,14 +27,10 @@ function UserLogin(props) {
                     <div className="card">
                         <img className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card cap" />
                         <div className="card-body">
-                            <div className="view gradient-card-header blue-gradient">
-                                <p className="red-text">
-                                    {error || ''}
-                                    <i className="close fa fa-times"></i>
-                                </p>
-                            </div>
-                            <h4 className="card-title">Игрок</h4>
+                            <h4 className="card-title"> {error || 'Игрок'}</h4>
                             <form onSubmit={props.onSubmit}>
+                                <div className="md-form">
+                                </div>
                                 <div className="md-form">
                                     <input type="text" value={name} name="name" onChange={props.onFieldChange} id="form-player-name" className="form-control" />
                                     <label htmlFor="name">{t('Name')}</label>
