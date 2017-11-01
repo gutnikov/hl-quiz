@@ -9,7 +9,7 @@ import {
 import t from './t';
 
 // How long the whole quest lasts
-const QUIZ_TIME_SEC = 60;
+const QUIZ_TIME_SEC = 240;
 
 // How much time to answer the question
 const QUESTION_TIME_SEC = 10;
