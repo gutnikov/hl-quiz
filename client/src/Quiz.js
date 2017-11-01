@@ -92,7 +92,11 @@ class Quiz extends Component {
 	}
 
 	render() {
-		return <div className="quiz-container">{this.renderCurrentState()}</div>;
+		return (<div className="row justify-content-stretch">
+			<div className="col-md-12 mb-3 animated fadeIn">
+				<div className="quiz-container">{this.renderCurrentState()}</div>
+			</div>
+	</div>);
 	}
 
 	renderCurrentState() {
@@ -122,17 +126,23 @@ class Quiz extends Component {
 
 	renderQuestion() {
 		return (<div className="quiz">
-			<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
-			<Countdown value={QUESTION_TIME_SEC}/>
+			{/* <QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/> */}
 			<QuizQuestion question={this.state.question}/>
+			<Countdown value={QUESTION_TIME_SEC}/>
 		</div>);
 	}
 
 	renderAnswer() {
-		return (<div className="quiz">
-			<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
-			<QuizQuestion question={this.state.question}/>;
-			<QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
+		return (
+			<div className="card">
+				<div className="card-body">
+					<div className="quiz">
+						<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+						{/* <QuizQuestion question={this.state.question}/> */}
+						<hr />
+						<QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
+				</div>
+			</div>
 		</div>);
 	}
 
@@ -182,7 +192,7 @@ class Quiz extends Component {
 			<div> {t('Player 2 rating')}: {this.state.player2Rating} </div>
 			<Link to='/checkin'>{t('Go back to reg')}</Link>;
 			</div>
-		)
+		);
 	}
 
 	renderError() {

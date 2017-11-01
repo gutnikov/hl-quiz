@@ -43,6 +43,10 @@
   margin: 10px 0; 
 }
 
+.quiz-answer + .quiz-answer {
+  margin-left: 10px;
+}
+
 .quiz-answer-pending {
   color: gray;
 }
@@ -67,4 +71,10 @@
   width: 50%;
   display: inline-block;
   text-align: center;
+}
+
+.chip {
+  border-radius: 20px;
+  padding: 20px;
+  margin: 10px;
 }

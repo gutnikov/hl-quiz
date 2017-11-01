@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import t from './t';
+// import t from './t';
 
 class Countdown extends Component {
 	interval = 1000;

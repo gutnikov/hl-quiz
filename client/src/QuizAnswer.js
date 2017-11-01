@@ -8,7 +8,7 @@ const ANSWER_WRONG = 2;
 const ANSWER_NONE = 3;
 
 function QuizAnswer({player1Answer, player2Answer}) {
-	return (<div className="quiz-answers">
+	return (<div className="quiz-answers flex-center">
 		<div className={cx('quiz-answer', answerStateToClass(player1Answer.state))}>{player1Answer.text}</div>
 		<div className={cx('quiz-answer', answerStateToClass(player2Answer.state))}>{player2Answer.text}</div>
 	</div>);
