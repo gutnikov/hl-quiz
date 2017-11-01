@@ -81,6 +81,8 @@ class Quiz extends Component {
             // ids
             player1Id: player1Id,
             player2Id: player2Id,
+            player1: null,
+            player2: null,
             // scores
             player1Score: 0,
             player2Score: 0,
@@ -105,6 +107,10 @@ class Quiz extends Component {
         // Any shit?
         if (this.state.error) {
             return this.renderError();
+        }
+
+        if (!this.state.player1 && !this.state.player2) {
+            return this.renderLoading();
         }
 
         if (this.state.player1Rating !== null && this.state.player2Rating !== null) {
@@ -201,10 +207,30 @@ class Quiz extends Component {
         return <div>{t('OMAGAT...an error')}</div>
     }
 
+    renderLoading() {
+        return <div className="loading">{t('Loading...')}</div>
+    }
+
     componentDidMount() {
-        this.listenToInput();
-        this.setNextQuestion();
-        this.setQuizTimer();
+        fetch(`http://localhost:8080/players-info?p1Id=${this.state.player1Id}&p2Id=${this.state.player2Id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        }).then(result => {
+            this.setState({
+                player1: result.player1,
+                player2: result.player2
+            });
+
+            this.listenToInput();
+            this.setNextQuestion();
+            this.setQuizTimer();
+        });
     }
 
     componentWillUnmount() {
