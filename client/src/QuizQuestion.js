@@ -14,13 +14,26 @@ function QuizQuestion({question, timeout}) {
 			<div className="quiz-answer-variant row">	
 			{
 				question.variants.map(function(variant, index){
+					var icon = (index === 0 ) ? 
+						"img/ps-controls/triangle.svg" : 
+					(index === 1 ) ? 
+						"img/ps-controls/square.svg" : 
+					(index === 2 ) ? 
+						"img/ps-controls/circle.svg" : 
+						"img/ps-controls/cross.svg"
+					;
+
+					var iconPosition = (index === 0 || index === 1 ) ? 1 : 0 ;
+
 					return (<div className={(index === 1 || index === 2) ? "col-md-6 m-auto" : "col-md-12"} key={index}>
-						{(index === 1 || index === 2) ? 
-						<QuizQuestionVariant variant={variant}/> :  
+						{(index === 1) ? 
+							<QuizQuestionVariant variant={variant} iconPath={icon} iconAlign={"d-flex flex-row justify-content-end"} iconPosition={iconPosition} /> :  
+						(index === 2) ?
+							<QuizQuestionVariant variant={variant} iconPath={icon} iconAlign={"d-flex flex-row"} iconPosition={iconPosition} /> :  
 						<div className="container">
 							<div className="row">
 								<div className="col-md-6 m-auto">
-									<QuizQuestionVariant variant={variant}/>
+									<QuizQuestionVariant variant={variant} iconPath={icon} iconAlign={"d-flex flex-column"} iconPosition={iconPosition} />
 								</div>
 							</div>
 						</div>}

@@ -15,16 +15,16 @@ function UserLogin(props) {
     const canSubmit = name && name.trim().length && phone && phone.trim().length;
 
     if (registered) {
-        return <div className="col-6">
-                    <div className="card">
-                        <div className="card-body">
-                            {/* <h5 className="pink-text"><i className="fa fa-cutlery"></i> {error || ''}</h5> */}
-                            <h4 className="card-title">Игрок {name}</h4>
-                            <p className="card-text"><i className="fa fa-phone"></i> {phone}</p>
-                            <h4 className="card-title">{t('Registered')}!</h4>
-                        </div>
-                    </div>
-                </div>;
+        return (<div className="col-6">
+            <div className="card">
+                <div className="card-body">
+                    {/* <h5 className="pink-text"><i className="fa fa-cutlery"></i> {error || ''}</h5> */}
+                    <h4 className="card-title">Игрок {name}</h4>
+                    <p className="card-text"><i className="fa fa-phone"></i> {phone}</p>
+                    <h4 className="card-title">{t('Registered')}!</h4>
+                </div>
+            </div>
+        </div>);
 
     } else {
         return <div className="col-6">

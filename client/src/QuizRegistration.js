@@ -12,7 +12,7 @@ function voidUser(id = null) {
         phone: '',
         error: null,
         registered: false
-    }
+    };
 }
 
 const errorMarkup = function (text) {
