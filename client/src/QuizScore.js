@@ -1,10 +1,10 @@
 import React from 'react';
 import t from './t';
 
-function QuizScore({player1Score, player2Score}) {
+function QuizScore({player1, player2, player1Score, player2Score}) {
 	return (<div className="quiz-score">
-		<div className="player-score">{t('Player 1 score')}: <br /> {player1Score}</div>
-		<div className="player-score">{t('Player 2 score')}: <br /> {player2Score}</div>
+		<div className="player-score">{player1.name}: <br /> {player1Score}</div>
+		<div className="player-score">{player2.name}: <br /> {player2Score}</div>
 	</div>);
 }
 

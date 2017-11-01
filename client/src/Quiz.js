@@ -146,9 +146,9 @@ class Quiz extends Component {
                     <div className="quiz">
                         {this.state.question.text}
                         <hr/>
-                        <QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+                        <QuizScore player1={this.state.player1} player2={this.state.player2} player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
                         <hr/>
-                        <QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
+                        <QuizAnswer player1={this.state.player1} player2={this.state.player2} player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
                     </div>
                 </div>
             </div>);
@@ -188,16 +188,18 @@ class Quiz extends Component {
 
     renderScore() {
         let winner;
+
         if (this.state.player1Score === this.state.player2Score) {
             winner = <div>{t('Draw')}</div>
         } else {
-            winner = <div>{t('The winner is player')} {this.state.player1Score > this.state.player2Score ? 1 : 2}</div>;
+            winner = <div>{t('The winner is player')}<strong>{this.state.player1Score > this.state.player2Score ? this.state.player1.name : this.state.player2.name}</strong></div>;
         }
+
         return (
             <div>
                 <div> {winner} </div>
-                <div> {t('Player 1 rating')}: {this.state.player1Rating} </div>
-                <div> {t('Player 2 rating')}: {this.state.player2Rating} </div>
+                <div> {this.state.player1.name}: {this.state.player1Rating} </div>
+                <div> {this.state.player2.name}: {this.state.player2Rating} </div>
                 <Link to='/checkin'>{t('Go back to reg')}</Link>;
             </div>
         );
