@@ -35,6 +35,7 @@ class QuizRegistration extends Component {
 
     render() {
         const bothRegistered = this.state.user1.registered && this.state.user2.registered;
+
         if (bothRegistered) {
             return <Link className="btn btn-unique waves-effect waves-light" to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>;
         } else {
@@ -42,8 +43,8 @@ class QuizRegistration extends Component {
                 <div className="col-12 text-center mb-3">
                     <h3>Регистрация <span className="badge badge-pill red">ожидаем 2 участников</span></h3>
 				</div>
-                <UserLogin user={this.state.user1} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1}/>
-				<UserLogin user={this.state.user2} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2}/>
+                <UserLogin user={this.state.user1} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1} onPhoneChange={ value => {this.onPhoneChange(1, value)} } />
+				<UserLogin user={this.state.user2} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2} onPhoneChange={ value => {this.onPhoneChange(2, value)} } />
 			</div>;
         }
     }
@@ -57,6 +58,14 @@ class QuizRegistration extends Component {
         this.setState({
             [`user${formId}`]: Object.assign({}, this.state[`user${formId}`], {
                 [name]: value
+            })
+        });
+    }
+
+    onPhoneChange(formId, value) {
+        this.setState({
+            [`user${formId}`]: Object.assign({}, this.state[`user${formId}`], {
+                ['phone']: value
             })
         });
     }

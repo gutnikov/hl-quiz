@@ -1,5 +1,9 @@
 import React from 'react';
 import t from './t';
+import Phone from 'react-phone-number-input';
+
+import rrui from 'react-phone-number-input/rrui.css';
+import rpni from 'react-phone-number-input/style.css';
 
 function UserLogin(props) {
     const {
@@ -37,8 +41,10 @@ function UserLogin(props) {
                                 </div>
 
                                 <div className="md-form">
-                                    <input type="text" value={phone} name="phone" onChange={props.onFieldChange} id="form-player-phone" className="form-control" />
-                                    <label htmlFor="phone">{t('Phone')}</label>
+                                    <Phone
+                                        country="RU"
+                                        placeholder="Ваш телефон"
+                                        onChange={ props.onPhoneChange }/>
                                 </div>
 
                                 <div className="text-center">
