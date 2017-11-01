@@ -42,7 +42,7 @@ function UserLogin(props) {
                                 </div>
 
                                 <div className="text-center">
-                                <button className="btn btn-primary" type="button" onClick={props.onSubmit} disabled={canSubmit ? null : 'disabled'}>{t('Done')} <i className="fa fa-play ml-1"/></button>
+                                <button className="btn btn-primary" type="submit" onClick={props.onSubmit} disabled={canSubmit ? null : 'disabled'}>{t('Done')} <i className="fa fa-play ml-1"/></button>
                                 </div>
                             </form>
                         </div>

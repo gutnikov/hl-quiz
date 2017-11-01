@@ -23,13 +23,13 @@ class QuizRegistration extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             user1: voidUser(),
             user2: voidUser()
         };
-        this.onSubmit1 = this.onSubmit.bind(this, 1);
+
         this.onFieldChange1 = this.onFieldChange.bind(this, 1);
-        this.onSubmit2 = this.onSubmit.bind(this, 2);
         this.onFieldChange2 = this.onFieldChange.bind(this, 2);
     }
 
@@ -42,8 +42,8 @@ class QuizRegistration extends Component {
                 <div className="col-12 text-center mb-3">
                     <h3>Регистрация <span className="badge badge-pill red">ожидаем 2 участников</span></h3>
 				</div>
-                <UserLogin user={this.state.user1} onSubmit={this.onSubmit1} onFieldChange={this.onFieldChange1}/>
-				<UserLogin user={this.state.user2} onSubmit={this.onSubmit2} onFieldChange={this.onFieldChange2}/>
+                <UserLogin user={this.state.user1} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1}/>
+				<UserLogin user={this.state.user2} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2}/>
 			</div>;
         }
     }
@@ -53,11 +53,7 @@ class QuizRegistration extends Component {
             name,
             value
         } = event.target;
-        console.log({
-            [`user${formId}`]: Object.assign({}, this.state[`user${formId}`], {
-                [name]: value
-            })
-        });
+
         this.setState({
             [`user${formId}`]: Object.assign({}, this.state[`user${formId}`], {
                 [name]: value
@@ -65,7 +61,9 @@ class QuizRegistration extends Component {
         });
     }
 
-    onSubmit(formId) {
+    onSubmit(e, formId) {
+        e.preventDefault();
+
         // Try to register user...
         fetch('http://localhost:8080/player', {
             method: 'POST',
