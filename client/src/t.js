@@ -13,7 +13,9 @@ const map = {
 	'Player 1 rating':'Рейтинг игрока 1',
 	'Player 2 rating':'Рейтинг игрока 2',
 	'Go back to reg':'Новый матч',
-	'Value': 'Стоимость вопроса'
+	'Value': 'Стоимость вопроса',
+	'New game': 'Новая игра',
+	'Players rating': 'Рейтинг игроков'
 };
 
 export default function(msg) {

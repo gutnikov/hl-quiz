@@ -14,7 +14,7 @@ class MainMenu extends Component {
 								<h5 className="mb-5 Up">Отвечай на вопросы, занимай место в турнирной таблице по знанию азов отрасли и получай классные призы!</h5>
 							</li>
 							<li>
-								<a href="/checkin"  className="btn btn-purple btn-rounded"><i className="fa fa-gamepad left"></i> {t('New game!')}</a>
+								<a href="/checkin"  className="btn btn-purple btn-rounded"><i className="fa fa-gamepad left"></i> {t('New game')}</a>
 							</li>
 							<li>
 								<a href="/rating" className="btn btn-outline-purple btn-rounded"><i className="fa fa-group left"></i> {t('Players rating')}</a>
