@@ -135,8 +135,6 @@ function updateRatings() {
     return players;
 }
 
-// Actual players list
-//
 /**
  * Update users positions
  *
@@ -147,6 +145,27 @@ app.get('/update-positions', function(req, res) {
 
     res.json({
         players: players
+    });
+});
+
+/**
+ * Get player data
+ *
+ * curl -d '{"p1": "", "p2":""}' -X GET -H "Content-Type: application/json" http://localhost:8080/players
+ */
+app.get('/players-info', function(req, res) {
+
+    const p1 = db.get('players').find({ 'id': req.query.p1Id }).value();
+    const p2 = db.get('players').find({ 'id': req.query.p2Id }).value();
+
+    if (!p1 || !p2) {
+        res.sendStatus(404); // Not found
+        return;
+    }
+
+    res.json({
+        player1: p1,
+        player2: p2
     });
 });
 

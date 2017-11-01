@@ -9,7 +9,7 @@ import {
 import t from './t';
 
 // How long the whole quest lasts
-const QUIZ_TIME_SEC = 60;
+const QUIZ_TIME_SEC = 240;
 
 // How much time to answer the question
 const QUESTION_TIME_SEC = 10;
@@ -81,6 +81,8 @@ class Quiz extends Component {
             // ids
             player1Id: player1Id,
             player2Id: player2Id,
+            player1: null,
+            player2: null,
             // scores
             player1Score: 0,
             player2Score: 0,
@@ -105,6 +107,10 @@ class Quiz extends Component {
         // Any shit?
         if (this.state.error) {
             return this.renderError();
+        }
+
+        if (!this.state.player1 && !this.state.player2) {
+            return this.renderLoading();
         }
 
         if (this.state.player1Rating !== null && this.state.player2Rating !== null) {
@@ -140,9 +146,9 @@ class Quiz extends Component {
                     <div className="quiz">
                         {this.state.question.text}
                         <hr/>
-                        <QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
+                        <QuizScore player1={this.state.player1} player2={this.state.player2} player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
                         <hr/>
-                        <QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
+                        <QuizAnswer player1={this.state.player1} player2={this.state.player2} player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
                     </div>
                 </div>
             </div>);
@@ -182,16 +188,18 @@ class Quiz extends Component {
 
     renderScore() {
         let winner;
+
         if (this.state.player1Score === this.state.player2Score) {
             winner = <div>{t('Draw')}</div>
         } else {
-            winner = <div>{t('The winner is player')} {this.state.player1Score > this.state.player2Score ? 1 : 2}</div>;
+            winner = <div>{t('The winner is player')}<strong>{this.state.player1Score > this.state.player2Score ? this.state.player1.name : this.state.player2.name}</strong></div>;
         }
+
         return (
             <div>
                 <div> {winner} </div>
-                <div> {t('Player 1 rating')}: {this.state.player1Rating} </div>
-                <div> {t('Player 2 rating')}: {this.state.player2Rating} </div>
+                <div> {this.state.player1.name}: {this.state.player1Rating} </div>
+                <div> {this.state.player2.name}: {this.state.player2Rating} </div>
                 <Link to='/checkin'>{t('Go back to reg')}</Link>;
             </div>
         );
@@ -201,10 +209,30 @@ class Quiz extends Component {
         return <div>{t('OMAGAT...an error')}</div>
     }
 
+    renderLoading() {
+        return <div className="loading">{t('Loading...')}</div>
+    }
+
     componentDidMount() {
-        this.listenToInput();
-        this.setNextQuestion();
-        this.setQuizTimer();
+        fetch(`http://localhost:8080/players-info?p1Id=${this.state.player1Id}&p2Id=${this.state.player2Id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            if (res.status === 200) {
+                return res.json();
+            }
+        }).then(result => {
+            this.setState({
+                player1: result.player1,
+                player2: result.player2
+            });
+
+            this.listenToInput();
+            this.setNextQuestion();
+            this.setQuizTimer();
+        });
     }
 
     componentWillUnmount() {

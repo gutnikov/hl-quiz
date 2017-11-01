@@ -15,7 +15,8 @@ const map = {
 	'Go back to reg':'Новый матч',
 	'Value': 'Стоимость вопроса',
 	'New game': 'Новая игра',
-	'Players rating': 'Рейтинг игроков'
+	'Players rating': 'Рейтинг игроков',
+	'Loading...': 'Загрузка'
 };
 
 export default function(msg) {
