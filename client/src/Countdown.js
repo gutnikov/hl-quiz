@@ -7,16 +7,15 @@ class Countdown extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: props.value * 1000
+			value: props.value * 1000,
+			color: props.color
 		};
 	}
 
 	render() {
-		return <div className="progress">
-					<div className="progress-bar bg-success" role="progressbar" style={{width: this.state.value/100 + '%'}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-				</div>
-				;
-		// <div>{t('Time to answer')} : {this.state.value/1000}</div>
+		return (<div className="progress mt-3 mb-0">
+			<div className={"progress-bar " + this.state.color} role="progressbar" style={{width: this.state.value/100 + '%'}} aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>);
 	}
 
 	componentDidMount() {

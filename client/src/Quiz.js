@@ -3,7 +3,6 @@ import QuestionsList from './QuestionsList';
 import QuizQuestion from './QuizQuestion';
 import QuizScore from './QuizScore';
 import QuizAnswer from './QuizAnswer';
-import Countdown from './Countdown';
 import {
     Link
 } from 'react-router-dom';
@@ -47,7 +46,7 @@ const GAMEPAD_KEYS_INDEX = {
 };
 
 class Quiz extends Component {
-
+	
 	questions = null;
 	questionTimerId = null;
 	indicationTimerId = null;
@@ -88,6 +87,7 @@ class Quiz extends Component {
 			player1Answer: null,
 			player2Answer: null,
 			error: null,
+			timeout: QUESTION_TIME_SEC,
 		};
 	}
 
@@ -127,8 +127,7 @@ class Quiz extends Component {
 	renderQuestion() {
 		return (<div className="quiz">
 			{/* <QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/> */}
-			<QuizQuestion question={this.state.question}/>
-			<Countdown value={QUESTION_TIME_SEC}/>
+			<QuizQuestion question={this.state.question} timeout={this.state.timeout}/>
 		</div>);
 	}
 
@@ -137,8 +136,9 @@ class Quiz extends Component {
 			<div className="card">
 				<div className="card-body">
 					<div className="quiz">
+						{this.state.question.text}
+						<hr />
 						<QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
-						{/* <QuizQuestion question={this.state.question}/> */}
 						<hr />
 						<QuizAnswer player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
 				</div>
