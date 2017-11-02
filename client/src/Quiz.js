@@ -158,7 +158,7 @@ class Quiz extends Component {
                 score
             })
         }).then(function (res) {
-            if (res.status === 200) {
+            if (res.status === 200) { // может прийтий 409 - если игроки с одинаковым телефоном
                 return res.json();
             }
         });
@@ -179,19 +179,21 @@ class Quiz extends Component {
         let winner;
 
         if (this.state.player1Score === this.state.player2Score) {
-            winner = <div>{t('Draw')}</div>
+            winner = <span>{t('Победила ничья')}</span>;
         } else {
-            winner = <div>{t('The winner is player')}<strong>{this.state.player1Score > this.state.player2Score ? this.state.player1.name : this.state.player2.name}</strong></div>;
+            winner = <span>{t('Игрок ')}<strong>{((this.state.player1Score > this.state.player2Score) ? this.state.player1.name : this.state.player2.name)}</strong> {t('уверенно одержал победу')}</span>;
         }
 
-        return (
-            <div>
-                <div> {winner} </div>
-                <div> {this.state.player1.name}: {this.state.player1Rating} </div>
-                <div> {this.state.player2.name}: {this.state.player2Rating} </div>
-                <Link to='/checkin'>{t('Go back to reg')}</Link>;
-            </div>
-        );
+        return (<div className="card animated bounceIn">
+                <h3 className="card-header purple darken-1 white-text">{winner}</h3>
+                <div className="card-body">
+                    <h4 className="card-title">{t('Поздравляем с победой!')}</h4>
+                    <p className="card-text">Игрок {this.state.player1.name} набрал всего очков: {this.state.player1Rating}<br /
+                    >Игрок {this.state.player2.name} набрал всего очков: {this.state.player2Rating}</p>
+                    <Link className="btn purple darken-1" to='/checkin'>{t('Go back to reg')}</Link>
+                    <Link className="btn purple darken-1" to='/rating'>{t('Рейтинг игроков')}</Link>
+                </div>
+            </div>);
     }
 
     renderError() {

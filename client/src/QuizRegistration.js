@@ -16,7 +16,7 @@ function voidUser(id = null) {
 }
 
 const errorMarkup = function (text) {
-    return (<span className="badge badge-pill red">{text}</span>);
+    return (<span className="badge badge-pill red animated shake">{text}</span>);
 };
 
 class QuizRegistration extends Component {
@@ -37,14 +37,14 @@ class QuizRegistration extends Component {
         const bothRegistered = this.state.user1.registered && this.state.user2.registered;
 
         if (bothRegistered) {
-            return <Link className="btn btn-unique waves-effect waves-light" to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>;
+            return <Link className="btn btn-unique waves-effect waves-light animated zoomIn" to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>;
         } else {
-            return <div className="row">
+            return <div className="row animated zoomIn">
                 <div className="col-12 text-center mb-3">
                     <h3>Регистрация <span className="badge badge-pill red">ожидаем 2 участников</span></h3>
 				</div>
-                <UserLogin user={this.state.user1} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1} onPhoneChange={ value => {this.onPhoneChange(1, value)} } />
-				<UserLogin user={this.state.user2} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2} onPhoneChange={ value => {this.onPhoneChange(2, value)} } />
+                <UserLogin user={this.state.user1} img={'img/bi03.jpg'} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1} onPhoneChange={ value => {this.onPhoneChange(1, value)} } />
+				<UserLogin user={this.state.user2} img={'img/eng02.jpg'} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2} onPhoneChange={ value => {this.onPhoneChange(2, value)} } />
 			</div>;
         }
     }

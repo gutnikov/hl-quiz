@@ -1,3 +1,7 @@
+body {
+  background-image: url('https://mdbootstrap.com/img/Photos/Others/gradient2.png'); 
+}
+
 .App {
   text-align: center;
 }
@@ -89,4 +93,19 @@
 
 .player-score .card {
   animation-delay: 200ms;
+}
+
+.game-background {
+  background-color: rgba(156,39,176,.1);
+}
+
+.navbar-view {
+  min-height: 100vh;
+}
+
+[data-reactroot] {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

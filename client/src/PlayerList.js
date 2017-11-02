@@ -16,31 +16,35 @@ class PlayerList extends Component {
         return (
             <div className="row">
                 <div className="col-12 animated fadeIn">
-                    <h1 className="display-4 font-bold mb-5 Up">Рейтинг игроков</h1>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                {/* <th>№</th> */}
-                                <th>Rating</th>
-                                <th>Name</th>
-                                <th>Score</th>
-                                {/* <th>Contact</th> */}
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {
-                            this.state.players.map(function(player) {
-                                return (<tr key={player.id}>
-                                    {/* <th scope="row">{t('id = ')}{player.id}</th> */}
-                                    <th scope="row">{t('rating = ')}{player.rating}</th>
-                                    <td>{t('name = ')}{player.name}</td>
-                                    <td>{t('score = ')}{player.score}</td>
-                                    {/* <td>{t('phone = ')}{player.phone}</td> */}
-                                </tr>);
-                            })
-                        }
-                        </tbody>
-                    </table>
+                    <div className="card">
+                        <div className="card-body">
+                            <h1 className="display-4 font-bold mb-5 Up">Рейтинг игроков</h1>
+                            <table className="table secondary-color-dark text-white text-center animated zoomIn">
+                                <thead>
+                                    <tr>
+                                        {/* <th>№</th> */}
+                                        <th className="text-center"># место</th>
+                                        <th className="text-center">Имя игрока</th>
+                                        <th className="text-center">Количество очков</th>
+                                        {/* <th>Contact</th> */}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {
+                                    this.state.players.map(function(player) {
+                                        return (<tr key={player.id}>
+                                            {/* <th scope="row">{t('id = ')}{player.id}</th> */}
+                                            <th scope="row"><h3>{player.rating}{t(')')}</h3></th>
+                                            <td><h3>{player.name}</h3></td>
+                                            <td><h3>{player.score}</h3></td>
+                                            {/* <td>{t('phone = ')}{player.phone}</td> */}
+                                        </tr>);
+                                    })
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

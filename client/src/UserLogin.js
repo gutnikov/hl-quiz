@@ -16,7 +16,7 @@ function UserLogin(props) {
 
     if (registered) {
         return (<div className="col-6">
-            <div className="card">
+            <div className="card animated bounceIn">
                 <div className="card-body">
                     {/* <h5 className="pink-text"><i className="fa fa-cutlery"></i> {error || ''}</h5> */}
                     <h4 className="card-title">Игрок {name}</h4>
@@ -29,7 +29,7 @@ function UserLogin(props) {
     } else {
         return <div className="col-6">
                     <div className="card">
-                        <img className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card cap" />
+                        <img className="img-fluid" src={props.img} alt="Card cap" />
                         <div className="card-body">
                             <h4 className="card-title"> {error || 'Игрок'}</h4>
                             <form onSubmit={props.onSubmit}>
