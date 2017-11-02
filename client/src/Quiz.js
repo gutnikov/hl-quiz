@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import QuestionsList from './QuestionsList';
 import QuizQuestion from './QuizQuestion';
-import QuizScore from './QuizScore';
 import QuizAnswer from './QuizAnswer';
 import {
     Link
@@ -133,25 +132,15 @@ class Quiz extends Component {
     }
 
     renderQuestion() {
-        return (<div className="quiz">
-            {/* <QuizScore player1Score={this.state.player1Score} player2Score={this.state.player2Score}/> */}
+        return (
             <QuizQuestion question={this.state.question} timeout={this.state.timeout}/>
-        </div>);
+        );
     }
 
     renderAnswer() {
         return (
-            <div className="card">
-                <div className="card-body">
-                    <div className="quiz">
-                        {this.state.question.text}
-                        <hr/>
-                        <QuizScore player1={this.state.player1} player2={this.state.player2} player1Score={this.state.player1Score} player2Score={this.state.player2Score}/>
-                        <hr/>
-                        <QuizAnswer player1={this.state.player1} player2={this.state.player2} player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer}/>
-                    </div>
-                </div>
-            </div>);
+            <QuizAnswer player1={this.state.player1} player2={this.state.player2} player1Answer={this.state.player1Answer} player2Answer={this.state.player2Answer} player1Score={this.state.player1Score} player2Score={this.state.player2Score} />
+        );
     }
 
     renderSaveResults() {
@@ -349,7 +338,7 @@ class Quiz extends Component {
     // Someone answered?
     onQuestionAnswer(playerId, isRight) {
         const [addTo1, addTo2] = (isRight ? this.rightScoreTo : this.wrongScoreTo)[playerId];
-
+        
         this.setState({
             [`player${playerId}AnswerState`]: isRight ? ANSWER_RIGHT : ANSWER_WRONG,
             player1Score: this.state.player1Score + addTo1,

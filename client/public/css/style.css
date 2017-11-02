@@ -9,6 +9,7 @@ h2:empty {
 .navbar:not(.top-nav-collapse) {
     background: transparent !important;
 }
+
 @media (max-width: 768px) {
     .navbar:not(.top-nav-collapse) {
         background: #f8bbd0 !important;

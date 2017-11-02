@@ -78,3 +78,15 @@
   padding: 20px;
   margin: 10px;
 }
+
+.is-hidden {
+  display: none;
+}
+
+.card--answer {
+  animation-duration: 200ms;
+}
+
+.player-score .card {
+  animation-delay: 200ms;
+}

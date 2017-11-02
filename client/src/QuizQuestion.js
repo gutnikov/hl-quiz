@@ -4,9 +4,9 @@ import QuizQuestionVariant from './QuizQuestionVariant';
 // import t from './t';
 
 function QuizQuestion({question, timeout}) {
-	return (<div className="card">
+	return (<div className="card animated fadeIn">
 		<div className="card-header secondary-color-dark white-text">
-			<div className="quiz-question"> {/* {t('Question')}: */} {question.text} </div>
+			<h2 className="quiz-question"> {/* {t('Question')}: */} {question.text} </h2>
 		</div>
 		{/* <div className="quiz-value">{t('Value')}: {question.value}</div> */}
 		{/* <div className="quiz-answer-variants">{t('Answer variants')}:</div> */}

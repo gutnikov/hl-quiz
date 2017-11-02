@@ -5,7 +5,7 @@ function QuizQuestionVariant({variant, iconPath, iconAlign, iconPosition}) {
 			<div className={iconAlign}>
 				<img style={{order:iconPosition}} src={iconPath} />
 				<div className="d-flex justify-content-center">
-					<div className="m-2 align-self-center text-center">{variant}</div>
+					<h4 className="m-2 align-self-center text-center">{variant}</h4>
 				</div>
 			</div>
 	</div>);
