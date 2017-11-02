@@ -13,7 +13,7 @@ function QuizScore({player1, player2, player1Score, player2Score}) {
 		</div>
 		<div className="player-score">
 			<div className="card animated flipInX">
-				<h2 className="display-2 p-3">{player1Score}</h2>
+				<h2 className="display-2 p-3">{player2Score}</h2>
 			</div>
 		</div>
 	</div>);

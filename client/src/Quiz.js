@@ -188,8 +188,8 @@ class Quiz extends Component {
                 <h3 className="card-header purple darken-1 white-text">{winner}</h3>
                 <div className="card-body">
                     <h4 className="card-title">{t('Поздравляем с победой!')}</h4>
-                    <p className="card-text">Игрок {this.state.player1.name} набрал всего очков: {this.state.player1Rating}<br /
-                    >Игрок {this.state.player2.name} набрал всего очков: {this.state.player2Rating}</p>
+                    <p className="card-text">Игрок {this.state.player1.name} набрал всего очков: {this.state.player1Rating}<br />
+                    Игрок {this.state.player2.name} набрал всего очков: {this.state.player2Rating}</p>
                     <Link className="btn purple darken-1" to='/checkin'>{t('Go back to reg')}</Link>
                     <Link className="btn purple darken-1" to='/rating'>{t('Рейтинг игроков')}</Link>
                 </div>

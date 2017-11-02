@@ -21,7 +21,7 @@ function QuizAnswer({player1, player2, player1Answer, player2Answer, player1Scor
 				<div className="quiz-answers flex-center">
 					<h3 className={'section-heading' + cx('quiz-answer', answerStateToClass(player1Answer.state))}>{'Игрок ' + player1.name  + ' '} {(player1Answer.state  === 1) ? "ответил правильно!" : "ответил неверно!"}</h3>
 					<h3 className={'section-heading' + cx('quiz-answer', answerStateToClass(player2Answer.state))}>{'Игрок ' + player2.name  + ' '} {(player2Answer.state  === 1) ? "ответил правильно!" : "ответил неверно!"}</h3>
-					{(player1Answer.state === 3 && player2Answer.state === 3) ? <h3 className="section-heading">Ничья</h3> : ''}		
+					{(player1Answer.state === ANSWER_NONE && player2Answer.state === ANSWER_NONE) ? <h3 className="section-heading">Ничья</h3> : ''}
 				</div>
 			</div>
 		</div>
