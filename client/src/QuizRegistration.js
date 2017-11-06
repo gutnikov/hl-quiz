@@ -37,7 +37,11 @@ class QuizRegistration extends Component {
         const bothRegistered = this.state.user1.registered && this.state.user2.registered;
 
         if (bothRegistered) {
-            return <Link className="btn btn-unique waves-effect waves-light animated zoomIn" to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>;
+            return <div className="animated zoomIn">
+                <div className="animated pulse infinite">
+                    <Link className="btn btn-unique waves-effect waves-light" style={{'transform': 'scale(2)'}} to={`/quiz?p1=${this.state.user1.id}&p2=${this.state.user2.id}`}>{t('Fight')}</Link>
+                </div>
+            </div>;
         } else {
             return <div className="row animated zoomIn">
                 <div className="col-12 text-center mb-3">
