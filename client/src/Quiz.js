@@ -11,7 +11,7 @@ import t from './t';
 const QUIZ_TIME_SEC = 240;
 
 // How much time to answer the question
-const QUESTION_TIME_SEC = 10;
+const QUESTION_TIME_SEC = 15;
 
 // How long users will be shown the result of answer ( pause between questions )
 const PAUSE_TIME_SEC = 2;
