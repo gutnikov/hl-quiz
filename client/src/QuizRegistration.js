@@ -43,8 +43,8 @@ class QuizRegistration extends Component {
                 <div className="col-12 text-center mb-3">
                     <h3>Регистрация <span className="badge badge-pill red">ожидаем 2 участников</span></h3>
 				</div>
-                <UserLogin user={this.state.user1} img={'img/bi03.jpg'} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1} onPhoneChange={ value => {this.onPhoneChange(1, value)} } />
-				<UserLogin user={this.state.user2} img={'img/eng02.jpg'} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2} onPhoneChange={ value => {this.onPhoneChange(2, value)} } />
+                <UserLogin user={this.state.user1} img={'img/bi03.jpg'} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1} onPhoneChange={ value => {this.onPhoneChange(1, value)} } userId={1} />
+				<UserLogin user={this.state.user2} img={'img/eng02.jpg'} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2} onPhoneChange={ value => {this.onPhoneChange(2, value)} } userId={4} />
 			</div>;
         }
     }

@@ -28,31 +28,33 @@ function UserLogin(props) {
 
     } else {
         return <div className="col-6">
-                    <div className="card">
-                        <img className="img-fluid" src={props.img} alt="Card cap" />
-                        <div className="card-body">
-                            <h4 className="card-title"> {error || 'Игрок'}</h4>
-                            <form onSubmit={props.onSubmit}>
-                                <div className="md-form">
-                                </div>
-                                <div className="md-form">
-                                    <input type="text" value={name} name="name" onChange={props.onFieldChange} id="form-player-name" className="form-control" />
-                                    <label htmlFor="name">{t('Name')}</label>
-                                </div>
-
-                                <div className="md-form">
-                                    <Phone
-                                        country="RU"
-                                        placeholder="Ваш телефон"
-                                        onChange={ props.onPhoneChange }/>
-                                </div>
-
-                                <div className="text-center">
-                                <button className="btn btn-primary" type="submit" onClick={props.onSubmit} disabled={canSubmit ? null : 'disabled'}>{t('Done')} <i className="fa fa-play ml-1"/></button>
-                                </div>
-                            </form>
+            <div className="card">
+                <img className="img-fluid" src={props.img} alt="Card cap" />
+                <div className="card-body">
+                    <h4 className="card-title"> {error || 'Игрок'}</h4>
+                    <form onSubmit={props.onSubmit}>
+                        <div className="md-form">
                         </div>
-                    </div>
+                        <div className="md-form">
+                            <input tabIndex={props.userId} type="text" value={name} name="name" onChange={props.onFieldChange} id="form-player-name" className="form-control" />
+                            <label htmlFor="name">{t('Name')}</label>
+                        </div>
+
+                        <div className="md-form">
+                            <Phone
+                                tabIndex={props.userId + 1}
+                                country="RU"
+                                placeholder="Ваш телефон"
+                                onChange={ props.onPhoneChange }
+                            />
+                        </div>
+
+                        <div className="text-center">
+                        <button tabIndex={props.userId + 2} className="btn btn-primary" type="submit" onClick={props.onSubmit} disabled={canSubmit ? null : 'disabled'}>{t('Done')} <i className="fa fa-play ml-1"/></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 		</div>;
     }
 }
