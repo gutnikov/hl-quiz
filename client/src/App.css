@@ -71,8 +71,13 @@ body {
   margin: 30px 0;
 }
 
-.player-score, .player-answer {
+.player-answer {
   width: 50%;
+  display: inline-block;
+  text-align: center;
+}
+
+.player-score {
   display: inline-block;
   text-align: center;
 }
