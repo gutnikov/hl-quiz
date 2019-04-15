@@ -26,7 +26,9 @@ class QuizRegistration extends Component {
 
         this.state = {
             user1: voidUser(),
-            user2: voidUser()
+            user2: voidUser(),
+            approve1: false,
+            approve2: false
         };
 
         this.onFieldChange1 = this.onFieldChange.bind(this, 1);
@@ -47,10 +49,16 @@ class QuizRegistration extends Component {
                 <div className="col-12 text-center mb-3">
                     <h3>Регистрация <span className="badge badge-pill red">ожидаем 2 участников</span></h3>
 				</div>
-                <UserLogin user={this.state.user1} img={'img/bi03.jpg'} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1} onPhoneChange={ value => {this.onPhoneChange(1, value)} } userId={1} />
-				<UserLogin user={this.state.user2} img={'img/eng02.jpg'} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2} onPhoneChange={ value => {this.onPhoneChange(2, value)} } userId={4} />
+                <UserLogin user={this.state.user1} approved={this.state.approve1} formId={1} img={'img/bi03.jpg'} onApprove={e=>this.onApprove(e, 1)} onSubmit={(e) => this.onSubmit(e, 1)} onFieldChange={this.onFieldChange1} onPhoneChange={ value => {this.onPhoneChange(1, value)} } userId={1} />
+				<UserLogin user={this.state.user2} approved={this.state.approve2} formId={2} img={'img/eng02.jpg'} onApprove={e=>this.onApprove(e, 2)} onSubmit={(e) => this.onSubmit(e, 2)} onFieldChange={this.onFieldChange2} onPhoneChange={ value => {this.onPhoneChange(2, value)} } userId={4} />
 			</div>;
         }
+    }
+
+    onApprove(event, formId) {
+        this.setState({
+            [`approve${formId}`]: !this.state[`approve${formId}`]
+        });
     }
 
     onFieldChange(formId, event) {

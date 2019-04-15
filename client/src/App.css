@@ -1,5 +1,5 @@
 body {
-  background-image: url('/img/gradient2.png'); 
+  background-image: url('/img/gradient2.png');
 }
 
 .App {
@@ -44,7 +44,7 @@ body {
 } */
 
 .quiz-answer {
-  margin: 10px 0; 
+  margin: 10px 0;
 }
 
 .quiz-answer + .quiz-answer {
@@ -113,4 +113,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.h-approve {
+  color: #757575;
+  margin-left: 10px;
+  font-size: 12px !important;
+  position: initial !important;
 }

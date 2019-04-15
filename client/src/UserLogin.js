@@ -12,7 +12,7 @@ function UserLogin(props) {
         error,
         registered
     } = props.user;
-    const canSubmit = name && name.trim().length && phone && phone.trim().length;
+    const canSubmit = name && name.trim().length && phone && phone.trim().length && props.approved;
 
     if (registered) {
         return (<div className="col-6">
@@ -47,6 +47,11 @@ function UserLogin(props) {
                                 placeholder="Ваш телефон"
                                 onChange={ props.onPhoneChange }
                             />
+                        </div>
+
+                        <div className="md-form">
+                            <input type="checkbox" id={`approve${props.formId}`} onChange={props.onApprove} checked={props.approved}/>
+                            <label htmlFor={`approve${props.formId}`} className="h-approve">Даю согласие на обработку моих персональных данных</label>
                         </div>
 
                         <div className="text-center">
