@@ -121,3 +121,7 @@ body {
   font-size: 12px !important;
   position: initial !important;
 }
+
+.v-title {
+  text-align: center;
+}
