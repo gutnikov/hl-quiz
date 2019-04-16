@@ -1,188 +1,20 @@
 {
   "players": [
     {
-      "id": "dc653y1540j9p3cvd4",
-      "name": "1234",
-      "phone": "+71234",
-      "phoneTail": "71234",
-      "score": 23,
+      "id": "a223yc1w2tjui4sqq7",
+      "name": "Alexander",
+      "phone": "+792333333",
+      "phoneTail": "33333",
+      "score": 0,
       "rating": 1
     },
     {
-      "id": "dc653y1540j9p3d22f",
-      "name": "234tg",
-      "phone": "+72345",
-      "phoneTail": "72345",
-      "score": 22,
+      "id": "a223yc1w2tjui4teai",
+      "name": "Boris",
+      "phone": "+733533344",
+      "phoneTail": "33344",
+      "score": 0,
       "rating": 2
-    },
-    {
-      "id": "dc653yva2j9hp1p5p",
-      "name": "45",
-      "phone": "+7444448",
-      "phoneTail": "44448",
-      "score": 9,
-      "rating": 3
-    },
-    {
-      "id": "dc653yva2j9hp0y8i",
-      "name": "13",
-      "phone": "+59013",
-      "phoneTail": "59013",
-      "score": 7,
-      "rating": 4
-    },
-    {
-      "id": "dc653yot7j9g7esvc",
-      "name": "1",
-      "phone": "1",
-      "phoneTail": "1",
-      "score": 2,
-      "rating": 5
-    },
-    {
-      "id": "dc653yot7j9gdv5bj",
-      "name": "1",
-      "phone": "122",
-      "phoneTail": "122",
-      "score": 0,
-      "rating": 6
-    },
-    {
-      "id": "dc653yot7j9ge2vns",
-      "name": "9шш9ш",
-      "phone": "29ш34",
-      "phoneTail": "29ш34",
-      "score": 0,
-      "rating": 7
-    },
-    {
-      "id": "dc653yot7j9g9htxv",
-      "name": "1",
-      "phone": "3",
-      "phoneTail": "3",
-      "score": 0,
-      "rating": 8
-    },
-    {
-      "id": "dc653yot7j9g9htgw",
-      "name": "1",
-      "phone": "4",
-      "phoneTail": "4",
-      "score": 0,
-      "rating": 9
-    },
-    {
-      "id": "dc653yot7j9ge2yi5",
-      "name": "ш9ш9ш",
-      "phone": "ш9ш9",
-      "phoneTail": "ш9ш9",
-      "score": 0,
-      "rating": 10
-    },
-    {
-      "id": "dc653yot7j9g7ev8f",
-      "name": "2",
-      "phone": "2",
-      "phoneTail": "2",
-      "score": 0,
-      "rating": 11
-    },
-    {
-      "id": "dc653yu2ej9hl5761",
-      "name": "11222",
-      "phone": "+799999999999",
-      "phoneTail": "99999",
-      "score": 0,
-      "rating": 12
-    },
-    {
-      "id": "dc653yot7j9gdv0m6",
-      "name": "555",
-      "phone": "55",
-      "phoneTail": "55",
-      "score": 0,
-      "rating": 13
-    },
-    {
-      "id": "dc653yu2ej9hl4zat",
-      "name": "1",
-      "phone": "+79999999911",
-      "phoneTail": "99911",
-      "score": 0,
-      "rating": 14
-    },
-    {
-      "id": "dc653yot7j9gdz5cr",
-      "name": "1",
-      "phone": "334",
-      "phoneTail": "334",
-      "score": -1,
-      "rating": 15
-    },
-    {
-      "id": "dc653yot7j9gdzhgv",
-      "name": "1",
-      "phone": "144444",
-      "phoneTail": "44444",
-      "score": -1,
-      "rating": 16
-    },
-    {
-      "id": "dc653y11cpj9nh3o7x",
-      "name": "1",
-      "phone": "+71",
-      "phoneTail": "+71",
-      "score": -1,
-      "rating": 17
-    },
-    {
-      "id": "dc653y11cpj9nh3wzl",
-      "name": "2",
-      "phone": "+72",
-      "phoneTail": "+72",
-      "score": -1,
-      "rating": 18
-    },
-    {
-      "id": "dc653y11cpj9nhkv8n",
-      "name": "1",
-      "phone": "+723",
-      "phoneTail": "+723",
-      "score": -1,
-      "rating": 19
-    },
-    {
-      "id": "dc653y11cpj9nhkywy",
-      "name": "12",
-      "phone": "+7233",
-      "phoneTail": "+7233",
-      "score": -1,
-      "rating": 20
-    },
-    {
-      "id": "dc653y11cpj9nho2ts",
-      "name": "11111",
-      "phone": "+711111",
-      "phoneTail": "11111",
-      "score": -1,
-      "rating": 21
-    },
-    {
-      "id": "dc653y11cpj9nho3kk",
-      "name": "12",
-      "phone": "+7222222",
-      "phoneTail": "22222",
-      "score": -1,
-      "rating": 22
-    },
-    {
-      "id": "dc653yot7j9gdp3rx",
-      "name": "1",
-      "phone": "13e",
-      "phoneTail": "13e",
-      "score": -1,
-      "rating": 23
     }
   ]
 }
