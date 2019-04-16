@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . .
 
 EXPOSE 3000
+EXPOSE 8080
 
 #install server deps
 RUN npm install
